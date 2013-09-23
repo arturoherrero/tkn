@@ -44,6 +44,11 @@ Escape any command aliases
     $ alias ls="ls -a"
     $ \ls
 
+Resolve command aliases (works for executables, aliases, and shell builtins; but only in bash)
+
+    $ alias ls="ls -a"
+    $ command -v ls
+
 Quickly rename a file
 
     $ mv filename.{old,new}
@@ -123,6 +128,10 @@ Redirect standard input to a file. Print it to standard output
                 ┌───────────┐
                 │   file    │
                 └───────────┘
+
+Write the results of a pipeline to a file as root without running the whole pipeline as root
+
+    $ command | sudo tee file.txt >/dev/null
 
 Search for a <pattern> string inside all files in the current directory
 
@@ -229,8 +238,7 @@ Display the top ten running processes. (Sorted by memory usage)
 
 Kill all Ruby processes
 
-    $ ps aux | grep ruby | awk '{ print $2 }' | xargs kill -9
-    $ ps aux | awk '/ruby/ && ! /awk/ { system("kill -9 "$2) }'
+    $ pkill -f ruby
 
 32 bits or 64 bits?
 
